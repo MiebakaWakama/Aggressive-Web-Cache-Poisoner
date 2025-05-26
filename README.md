@@ -1,6 +1,7 @@
 # Overview
 
 **Note**: if you are new to web cache poisoning and deception, I recommend checking out James Kettle research here:  [Web Cache Entanglement: Novel Pathways to Poisoning](https://portswigger.net/research/web-cache-entanglement)
+
 Static files such as images, JavaScripts, text files are typically accessible anonymously,  do not contain sensitive information, and such, are considered safe for public caching in CDNs such as Akamai, CloudFront, CloudFlare, etc. Content Delivery Networks (CDNs) or reverse-proxies may intentionally or accident be configured for 
 Aggressive caching of these static files. Aggressive caching in the sense that regardless of the HTTP response returned e.g 403, 404, 400, 503, etc, by the application, provided the URL of the resource requested points to a static resource, the response will be cached regardless, poisoning the original resource or HTTP response and leading to a Denial-of-Service (DoS) of the static files. 
 Following my review the work of James Kettle on web cache poisoning, HTTP headers are mostly not keyed during the caching of resources by CDNs or reverse-proxies. Hence, any invalid HTTP header that may draw an error response from the application such as a simple header with a wrong value e.g Content-Length: xyz, should suffice to poison static resources that are aggressively cached. 
